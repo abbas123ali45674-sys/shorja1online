@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شورجة اونلاين - العرض الحصري</title>
+    <style>
+        :root { 
+            --primary: #000000; 
+            --accent: #fe2c55; 
+            --bg-grad: linear-gradient(135deg, #f9fafb 0%, #e5e7eb 100%);
+        }
+
+        body { 
+            margin: 0; padding: 0; 
+            font-family: 'Segoe UI', Tahoma, sans-serif; 
+            background: var(--bg-grad); 
+            color: #111827; 
+        }
+
+        .container { 
+            max-width: 480px; margin: 0 auto; 
+            background: #fff; min-height: 100vh; 
+            padding-bottom: 50px;
+            box-shadow: 0 0 40px rgba(0,0,0,0.1);
+        }
+
+        .hero { 
+            position: relative; width: 100%; height: 280px; 
+            background: url('https://a.top4top.io/p_3703jyn061.jpg') center/cover; 
+            border-bottom: 5px solid var(--primary);
+        }
+        .hero-overlay { 
+            position: absolute; bottom: 0; width: 100%; 
+            background: rgba(0, 0, 0, 0.85); 
+            color: #fff; padding: 20px; 
+            text-align: center; box-sizing: border-box; 
+        }
+        .old-price { text-decoration: line-through; color: #ff4d4d; font-size: 1.2rem; font-weight: bold; display: block; margin-bottom: 5px; }
+        .new-price { font-size: 1.8rem; font-weight: 900; color: #00d2ff; display: block; }
+
+        .content-padding { padding: 25px; }
+        .section-title { font-weight: 900; font-size: 1.3rem; margin-bottom: 25px; text-align: center; color: #000; }
+
+        .offer-card { 
+            border: 2px solid #000; border-radius: 15px; 
+            padding: 18px; margin-bottom: 15px; 
+            cursor: pointer; position: relative; background: #fff;
+        }
+        .offer-card input { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); width: 22px; height: 22px; }
+        
+        .offer-title { font-weight: 900; font-size: 1.05rem; padding-left: 35px; display: block; color: #000 !important; }
+        .offer-price { color: #ef4444; font-weight: 950; margin-top: 10px; display: block; font-size: 1.3rem; }
+
+        .field { margin-bottom: 25px; }
+        .field label { display: block; font-weight: 800; margin-bottom: 10px; color: #000; }
+        
+        input, select { 
+            width: 100%; border: 2px solid #eee; 
+            border-radius: 12px; padding: 15px; 
+            font-size: 1rem; box-sizing: border-box;
+            outline: none; background: #fafafa;
+        }
+        input:focus, select:focus { border-color: #000; background: #fff; }
+
+        /* تنسيق الخطأ في رقم الهاتف */
+        input.error { border-color: #ef4444; background: #fff2f2; }
+        .error-msg { color: #ef4444; font-size: 0.8rem; margin-top: 5px; display: none; font-weight: bold; }
+
+        #submitBtn { 
+            width: 100%; padding: 20px; border-radius: 15px; border: 0; 
+            background: #d1d5db; color: #fff; 
+            font-size: 1.4rem; font-weight: 900; cursor: not-allowed; 
+        }
+        #submitBtn.active { background: #000; cursor: pointer; }
+
+        .privacy-box { 
+            font-size: 0.85rem; color: #666; margin-top: 30px; 
+            padding: 15px; background: #f9f9f9; border-radius: 10px; 
+            border-right: 4px solid var(--accent);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="hero">
+        <div class="hero-overlay">
+            <span class="old-price">السعر القديم: 25,000 الف دينار</span>
+            <span class="new-price">السعر الجديد: 18,000 الف دينار</span>
+            <p style="margin-top: 10px; font-weight: bold;">التوصيل مجاني.. اطلب هسه شنو منتظر!</p>
+        </div>
+    </div>
+
+    <div class="content-padding">
+        <div class="section-title">للحجز املأ الحقول فضلاً </div>
+
+        <form id="orderForm">
+            <div class="field">
+                <div class="offer-card" onclick="selectOffer(this)">
+                    <input type="radio" name="offer" value="عرض 18" required>
+                    <span class="offer-title">شاحنة محمولة + ايربود + ستاند موبايل + شاحنة ايفون</span>
+                    <span class="offer-price">بــ 18,000 الف دينار فقط</span>
+                </div>
+                <div class="offer-card" onclick="selectOffer(this)">
+                    <input type="radio" name="offer" value="عرض 20">
+                    <span class="offer-title">2 شاحنة محمولة + 2 ايربود + شاحنة ايفون</span>
+                    <span class="offer-price">بـ 20,000 الف دينار فقط</span>
+                </div>
+                <div class="offer-card" onclick="selectOffer(this)">
+                    <input type="radio" name="offer" value="عرض 25">
+                    <span class="offer-title">3 شاحنة محمولة + 3 ايربود + 2 شاحنة ايفون</span>
+                    <span class="offer-price">بـ 25,000 الف دينار فقط</span>
+                </div>
+            </div>
+
+            <div class="field">
+                <label>اكتب اسمك</label>
+                <input type="text" id="name" placeholder="يرجى ادخال الاجابة ." required>
+            </div>
+
+            <div class="field">
+                <label>رقم هاتفك</label>
+                <input type="tel" id="phone" placeholder="مثال: 07701234567" required>
+                <div id="phoneError" class="error-msg">يرجى إدخال رقم هاتف عراقي صحيح (11 رقم)</div>
+            </div>
+
+            <div class="field">
+                <label>اسم المحافظة</label>
+                <select id="city" required onchange="checkForm()">
+                    <option value="" disabled selected>يرجى اختيار المحافظة</option>
+                    <option value="بغداد">بغداد</option>
+                    <option value="البصرة">البصرة</option>
+                    <option value="نينوى">نينوى</option>
+                    <option value="أربيل">أربيل</option>
+                    <option value="النجف">النجف</option>
+                    <option value="كربلاء">كربلاء</option>
+                    <option value="كركوك">كركوك</option>
+                    <option value="ذي قار">ذي قار</option>
+                    <option value="بابل">بابل</option>
+                    <option value="الأنبار">الأنبار</option>
+                    <option value="ديالى">ديالى</option>
+                    <option value="المثنى">المثنى</option>
+                    <option value="القادسية">القادسية</option>
+                    <option value="ميسان">ميسان</option>
+                    <option value="واسط">واسط</option>
+                    <option value="صلاح الدين">صلاح الدين</option>
+                    <option value="دهوك">دهوك</option>
+                    <option value="السليمانية">السليمانية</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label> اكتب عنوانك مع اقرب نقطة دالة</label>
+                <input type="text" id="address" placeholder="يرجى ادخال الاجابة ." required>
+            </div>
+
+            <button type="submit" id="submitBtn" disabled>إرسال</button>
+
+            <div class="privacy-box">
+                بإرسال هذا النموذج، فإنك توافق على إرسال معلوماتك الشخصية إلى <strong>(شورجة أونلاين)</strong> حيث ستستخدمه لسياساتها. ستحتفظ <strong>TIKTOK</strong> أيضاً بنسخة من هذه المعلومات وفقاً لسياسة الخصوصية الخاصة بها.
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    const form = document.getElementById('orderForm');
+    const btn = document.getElementById('submitBtn');
+    const phoneInput = document.getElementById('phone');
+    const phoneError = document.getElementById('phoneError');
+    
+    function selectOffer(element) {
+        document.querySelectorAll('.offer-card').forEach(card => card.style.borderWidth = '2px');
+        element.style.borderWidth = '4px';
+        element.querySelector('input').checked = true;
+        checkForm();
+    }
+
+    // وظيفة التحقق من رقم الهاتف
+    function validatePhone(phone) {
+        phone = phone.replace(/\s+/g, ''); // إزالة المسافات
+        const patternNormal = /^07[3-9][0-9]{8}$/; // يبدأ بـ 07 ومجموعه 11 رقم
+        const patternInternational = /^(9647|009647)[3-9][0-9]{8}$/; // المفتاح الدولي
+
+        if (patternNormal.test(phone)) return true;
+        if (patternInternational.test(phone)) return true;
+        return false;
+    }
+
+    function checkForm() {
+        const name = document.getElementById('name').value.trim();
+        const phone = phoneInput.value.trim();
+        const city = document.getElementById('city').value;
+        const address = document.getElementById('address').value.trim();
+        const offer = form.querySelector('input[name="offer"]:checked');
+
+        const isPhoneValid = validatePhone(phone);
+
+        // إظهار أو إخفاء رسالة الخطأ
+        if (phone.length > 0 && !isPhoneValid) {
+            phoneInput.classList.add('error');
+            phoneError.style.display = 'block';
+        } else {
+            phoneInput.classList.remove('error');
+            phoneError.style.display = 'none';
+        }
+
+        if(name && isPhoneValid && city && address && offer) {
+            btn.classList.add('active');
+            btn.disabled = false;
+        } else {
+            btn.classList.remove('active');
+            btn.disabled = true;
+        }
+    }
+
+    form.addEventListener('input', checkForm);
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const offerText = form.querySelector('input[name="offer"]:checked').parentElement.querySelector('.offer-title').innerText;
+        const msg = `🚀 طلب جديد:\n\n📦 العرض: ${offerText}\n👤 الاسم: ${document.getElementById('name').value}\n📞 الهاتف: ${document.getElementById('phone').value}\n📍 المحافظة: ${document.getElementById('city').value}\n🏠 العنوان: ${document.getElementById('address').value}`;
+        
+        // ضع رقمك هنا
+        window.location.href = `https://wa.me/9647709205938?text=${encodeURIComponent(msg)}`;
+    });
+</script>
+</body>
+</html>
